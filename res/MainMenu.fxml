@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.graph.MainMenu">
+   <children>
+      <HBox prefWidth="200.0">
+         <children>
+            <Label minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="155.0" style="-fx-font-weight: bold;" text="Generate Graph from File:">
+               <HBox.margin>
+                  <Insets bottom="6.0" left="6.0" right="16.0" top="6.0" />
+               </HBox.margin>
+               <padding>
+                  <Insets left="3.0" right="3.0" />
+               </padding>
+            </Label>
+            <Label minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="238.0" style="-fx-text-fill: red;" text="No graph currently loaded...">
+               <HBox.margin>
+                  <Insets bottom="6.0" left="16.0" top="6.0" />
+               </HBox.margin>
+            </Label>
+            <Button fx:id="loadGraphButton" alignment="CENTER" minWidth="-Infinity" onAction="#onLoadGraphClicked" mnemonicParsing="false" prefWidth="128.0" text="OK">
+               <HBox.margin>
+                  <Insets bottom="6.0" left="16.0" top="6.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+         <opaqueInsets>
+            <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
+         </opaqueInsets>
+         <padding>
+            <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
+         </padding>
+      </HBox>
+      <Separator prefWidth="200.0" />
+      <HBox prefWidth="200.0">
+         <children>
+            <Label minWidth="-Infinity" prefHeight="25.0" style="-fx-font-weight: bold;" text="Perform Depth-First Search:">
+               <padding>
+                  <Insets left="3.0" right="3.0" />
+               </padding>
+               <HBox.margin>
+                  <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
+               </HBox.margin>
+            </Label>
+            <TextField fx:id="dFSTextField" minWidth="-Infinity" onKeyReleased="#onKeyReleased" prefWidth="238.0">
+               <HBox.margin>
+                  <Insets bottom="6.0" left="16.0" top="6.0" />
+               </HBox.margin>
+            </TextField>
+            <Button fx:id="dFSButton" alignment="CENTER" minWidth="-Infinity" onAction="#onDFSClicked" mnemonicParsing="false" prefWidth="128.0" text="OK">
+               <HBox.margin>
+                  <Insets bottom="6.0" left="16.0" right="6.0" top="6.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+         <opaqueInsets>
+            <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
+         </opaqueInsets>
+         <padding>
+            <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
+         </padding>
+      </HBox>
+   </children>
+</VBox>
