@@ -24,7 +24,6 @@ import java.io.IOException;
  *************************************************************************************/
 public class Main extends Application {
 	
-	@FXML
 	public Button BrowseBttn, ConfirmBttn, CancelBttn;
 	@FXML
 	private TextField filePathField;
@@ -32,6 +31,7 @@ public class Main extends Application {
 	private FileChooser fileChooser;
 	private File file;
 	
+	//Gui Menu titles
 	public static final String MAIN_MENU_TITLE = "Graph Program", LOADER_TITLE = "Load a graph from a text file...";
 	
 	public static Scene browseDialog, menu;
@@ -41,16 +41,13 @@ public class Main extends Application {
 		
 	}
 	
+	//Main Method
 	public static void main(String[] args) throws Exception {
 		Application.launch(Main.class);
 		
 	}
 	
-	@Override
-	public void init() throws Exception {
-		super.init();
-	}
-	
+	//Where the GUI code gets executed
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		
@@ -79,7 +76,7 @@ public class Main extends Application {
 		
 	}
 	
-	//Graph Loading Methods
+	//Graph Loading Event Handler Methods
 	
 	@FXML
 	private void OnCancel(MouseEvent event) {
@@ -96,6 +93,8 @@ public class Main extends Application {
 		
 		if(file != null){
 			filePathField.setText(file.getAbsolutePath());
+		}else{
+			filePathField.clear();
 		}
 	}
 	
@@ -112,9 +111,11 @@ public class Main extends Application {
 				//Skip further execution
 				return;
 			}
+			
+			
 		}
 		
-		if(file.exists()){
+		if(file != null && file.exists()){
 			//Load Graph
 			//Check that graph loaded
 			//Change main menu label accordingly
