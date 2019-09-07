@@ -1,74 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.paint.*?>
-<?import javafx.scene.text.*?>
-
-<VBox fx:id="mainVBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.graph.Main">
-  <children>
-      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="640.0" VBox.vgrow="NEVER">
-         <center>
-            <TextField fx:id="filePathField" BorderPane.alignment="CENTER">
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-               <BorderPane.margin>
-                  <Insets bottom="6.0" left="6.0" right="6.0" />
-               </BorderPane.margin>
-            </TextField>
-         </center>
-         <right>
-            <Button fx:id="BrowseBttn" mnemonicParsing="false" onMouseClicked="#openBrowse" prefHeight="25.0" prefWidth="75.0" text="Browse..." BorderPane.alignment="CENTER">
-               <BorderPane.margin>
-                  <Insets bottom="6.0" left="6.0" right="6.0" />
-               </BorderPane.margin>
-               <padding>
-                  <Insets left="6.0" right="6.0" />
-               </padding>
-            </Button>
-         </right>
-         <top>
-            <Label text="Generate Graph From File:" BorderPane.alignment="CENTER_LEFT">
-               <BorderPane.margin>
-                  <Insets bottom="6.0" left="6.0" top="6.0" />
-               </BorderPane.margin>
-            </Label>
-         </top>
-         <padding>
-            <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
-         </padding>
-         <bottom>
-            <HBox alignment="CENTER" prefWidth="628.0" BorderPane.alignment="CENTER">
-               <children>
-                  <Button fx:id="ConfirmBttn" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#OnConfirm" prefHeight="25.0" prefWidth="75.0" text="OK" HBox.hgrow="NEVER">
-                     <padding>
-                        <Insets left="6.0" right="6.0" />
-                     </padding>
-                     <HBox.margin>
-                        <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
-                     </HBox.margin>
-                  </Button>
-                  <Button fx:id="CancelBttn" mnemonicParsing="false" onMouseClicked="#OnCancel" prefHeight="25.0" prefWidth="75.0" text="Cancel">
-                     <padding>
-                        <Insets left="6.0" right="6.0" />
-                     </padding>
-                     <HBox.margin>
-                        <Insets bottom="6.0" left="6.0" top="6.0" />
-                     </HBox.margin>
-                  </Button>
-               </children>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-               <padding>
-                  <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
-               </padding>
-            </HBox>
-         </bottom>
-      </BorderPane>
-  </children>
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="640.0"
+      xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.graph.gui.FileLoadDialog">
+   <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="640.0" VBox.vgrow="NEVER">
+      <center>
+         <TextField fx:id="filePathField" editable="false" BorderPane.alignment="CENTER">
+            <opaqueInsets>
+               <Insets/>
+            </opaqueInsets>
+            <BorderPane.margin>
+               <Insets bottom="6.0" left="6.0" right="6.0"/>
+            </BorderPane.margin>
+         </TextField>
+      </center>
+      <right>
+         <Button fx:id="BrowseBttn" mnemonicParsing="false" onMouseClicked="#onClickBrowse" prefHeight="25.0"
+                 prefWidth="75.0" text="Browse..." BorderPane.alignment="CENTER">
+            <BorderPane.margin>
+               <Insets bottom="6.0" left="6.0" right="6.0"/>
+            </BorderPane.margin>
+            <padding>
+               <Insets left="6.0" right="6.0"/>
+            </padding>
+         </Button>
+      </right>
+      <top>
+         <Label text="Generate Graph From File:" BorderPane.alignment="CENTER_LEFT">
+            <BorderPane.margin>
+               <Insets bottom="6.0" left="6.0" top="6.0"/>
+            </BorderPane.margin>
+         </Label>
+      </top>
+      <padding>
+         <Insets bottom="6.0" left="6.0" right="6.0" top="6.0"/>
+      </padding>
+      <bottom>
+         <HBox alignment="CENTER" prefWidth="628.0" BorderPane.alignment="CENTER">
+            <children>
+               <Button fx:id="ConfirmBttn" disable="true" alignment="CENTER" mnemonicParsing="false"
+                       onMouseClicked="#OnConfirm" prefHeight="25.0" prefWidth="75.0" text="OK" HBox.hgrow="NEVER">
+                  <padding>
+                     <Insets left="6.0" right="6.0"/>
+                  </padding>
+                  <HBox.margin>
+                     <Insets bottom="6.0" left="6.0" right="6.0" top="6.0"/>
+                  </HBox.margin>
+               </Button>
+               <Button fx:id="CancelBttn" mnemonicParsing="false" onMouseClicked="#OnCancel" prefHeight="25.0"
+                       prefWidth="75.0" text="Cancel">
+                  <padding>
+                     <Insets left="6.0" right="6.0"/>
+                  </padding>
+                  <HBox.margin>
+                     <Insets bottom="6.0" left="6.0" top="6.0"/>
+                  </HBox.margin>
+               </Button>
+            </children>
+            <opaqueInsets>
+               <Insets/>
+            </opaqueInsets>
+            <padding>
+               <Insets bottom="6.0" left="6.0" right="6.0" top="6.0"/>
+            </padding>
+         </HBox>
+      </bottom>
+   </BorderPane>
 </VBox>
