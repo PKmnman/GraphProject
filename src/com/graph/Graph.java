@@ -30,18 +30,23 @@ public interface Graph<T,V> {
 	 * @return an array of this graph's vectors
 	 */
 	List<? extends GraphVector<T, V>> getVectors();
-    
+	
+	/**
+	 * This abstract class represents key-value pair within a {@link Graph}
+	 * @param <T> the type of the vector identifier
+	 * @param <V> the type of the value stored in the vector
+	 */
     abstract class GraphVector<T, V>{
-        
-        private T nodeID;
+    
+		private T vectorID;
         private V value;
         
-        public GraphVector(T nodeID, V value){
-            this.nodeID = nodeID;
+        GraphVector(T vectorID, V value){
+            this.vectorID = vectorID;
             this.value = value;
         }
         
-        public GraphVector(){
+        GraphVector(){
             this(null, null);
         }
 	
@@ -62,11 +67,15 @@ public interface Graph<T,V> {
 		 * @return true if the target edge is removed, false otherwise
 		 */
         public abstract boolean removeEdge(GraphVector vector);
+		
+		/**
+		 * Returns all of this vector's edges as a {@link List} object.
+		 * @return a {@link List} containing all of this vector's edges
+		 */
+		public abstract List<? extends GraphVector> getEdges();
         
-        public abstract List<? extends GraphVector> getEdges();
-        
-        public T getNodeID() {
-            return nodeID;
+        public T getVectorID() {
+            return vectorID;
         }
         
         public V getValue() {
