@@ -1,3 +1,5 @@
+package com.graph;
+
 public class GraphVector<T,V> {
     private T identifier;
     private V value;
@@ -8,6 +10,10 @@ public class GraphVector<T,V> {
 
     public V getValue(){
         return this.value;
+    }
+
+    public void getEdges(){
+
     }
 
 
