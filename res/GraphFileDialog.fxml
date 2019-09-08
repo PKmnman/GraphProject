@@ -29,7 +29,7 @@
          </Button>
       </right>
       <top>
-         <Label text="Generate Graph From File:" BorderPane.alignment="CENTER_LEFT">
+         <Label text="Generate com.graph.Graph From File:" BorderPane.alignment="CENTER_LEFT">
             <BorderPane.margin>
                <Insets bottom="6.0" left="6.0" top="6.0"/>
             </BorderPane.margin>
