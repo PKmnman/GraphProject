@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -8,7 +7,7 @@
    <children>
       <HBox prefWidth="200.0">
          <children>
-            <Label minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="155.0" style="-fx-font-weight: bold;" text="Generate com.graph.Graph from File:">
+            <Label minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="155.0" style="-fx-font-weight: bold;" text="Generate Graph from File:">
                <HBox.margin>
                   <Insets bottom="6.0" left="6.0" right="16.0" top="6.0" />
                </HBox.margin>
@@ -21,7 +20,7 @@
                   <Insets bottom="6.0" left="16.0" top="6.0" />
                </HBox.margin>
             </Label>
-            <Button fx:id="loadGraphButton" alignment="CENTER" minWidth="-Infinity" onAction="#onLoadGraphClicked" mnemonicParsing="false" prefWidth="128.0" text="OK">
+            <Button fx:id="loadGraphButton" alignment="CENTER" minWidth="-Infinity" mnemonicParsing="false" onAction="#onLoadGraphClicked" prefWidth="128.0" text="OK">
                <HBox.margin>
                   <Insets bottom="6.0" left="16.0" top="6.0" />
                </HBox.margin>
@@ -50,7 +49,7 @@
                   <Insets bottom="6.0" left="16.0" top="6.0" />
                </HBox.margin>
             </TextField>
-            <Button fx:id="dFSButton" alignment="CENTER" minWidth="-Infinity" onAction="#onDFSClicked" mnemonicParsing="false" prefWidth="128.0" text="OK">
+            <Button fx:id="dFSButton" alignment="CENTER" minWidth="-Infinity" mnemonicParsing="false" onAction="#onDFSClicked" prefWidth="128.0" text="OK">
                <HBox.margin>
                   <Insets bottom="6.0" left="16.0" right="6.0" top="6.0" />
                </HBox.margin>

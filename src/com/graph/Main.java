@@ -12,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -41,6 +42,8 @@ public class Main extends Application {
 	
 	static Scene browseDialog, menu;
 	
+	static Stage loadFromFile;
+	
 	//Main Method
 	public static void main(String[] args) throws Exception {
 		Application.launch(Main.class);
@@ -53,10 +56,18 @@ public class Main extends Application {
 		
 		Parent p;
 		
+		loadFromFile = new Stage(StageStyle.DECORATED);
+		
 		try {
 			//Load all of the GUI's
 			p = FXMLLoader.load(Main.class.getResource("/GraphFileDialog.fxml"));
 			browseDialog = new Scene(p);
+			
+			loadFromFile.setScene(browseDialog);
+			loadFromFile.sizeToScene();
+			loadFromFile.resizableProperty().set(false);
+			loadFromFile.initOwner(primaryStage);
+			
 			
 			p = FXMLLoader.load(MainMenu.class.getResource("/MainMenu.fxml"));
 			menu = new Scene(p);
@@ -65,6 +76,8 @@ public class Main extends Application {
 			System.err.println("There was a problem loading the FXML scene data");
 			System.err.println(e.getMessage());
 		}
+		
+		
 		
 		//Set the scene to the main menu
 		primaryStage.setScene(menu);
@@ -84,7 +97,7 @@ public class Main extends Application {
 	}
 	
 	@FXML
-	private void openBrowse(MouseEvent event){
+	private void onClickBrowse(MouseEvent event){
 		fileChooser = new FileChooser();
 		FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("Text Files", "*.txt");
 		fileChooser.getExtensionFilters().add(filter);
