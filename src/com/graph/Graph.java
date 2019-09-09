@@ -30,7 +30,9 @@ public interface Graph<T,V> {
 	 * @return an array of this graph's vectors
 	 */
 	List<? extends GraphVertex<T, V>> getVectors();
-	
+
+	boolean contains(T nodeID);
+
 	/**
 	 * This abstract class represents key-value pair within a {@link Graph}
 	 * @param <T> the type of the vector identifier
