@@ -5,23 +5,32 @@ import java.util.List;
 
 public class ListGraph<T, V> implements Graph<T,V> {
     
-    private ListVector entryPoint;
+    private ListVertex entryPoint;
 
     public ListGraph(){
         this.entryPoint = null;
     }
 
-    public ListGraph(ListVector entryPoint){
+    public ListGraph(ListVertex entryPoint){
        this.entryPoint = entryPoint;
     }
     
     @Override
-    public GraphVector<T, V> depthSearch(GraphVector vector, T targetVectorID) {
+    public GraphVertex<T, V> depthSearch(GraphVertex vertex, T targetVectorID) {
+        
+        List<GraphVertex> vEdges = vertex.getEdges();
+        
+        for (int i = 0; i < vEdges.size(); i++) {
+            if(false){
+                depthSearch(vEdges.get(i), targetVectorID);
+            }
+        }
+        
         return null;
     }
     
     @Override
-    public GraphVector<T, V> breadthSearch(T nodeID) {
+    public GraphVertex<T, V> breadthSearch(T nodeID) {
         return null;
     }
     
@@ -32,7 +41,7 @@ public class ListGraph<T, V> implements Graph<T,V> {
     }
     
     @Override
-    public List<? extends GraphVector<T, V>> getVectors() {
+    public List<? extends GraphVertex<T, V>> getVectors() {
         return new ArrayList<>();
     }
     
