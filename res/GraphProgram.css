@@ -1,9 +1,39 @@
-.button{
-    -fx-background-color: linear-gradient(45deg, rgba(108, 103, 154, 0.5) 0%, rgba(108, 103, 154, 0.5) 25%,rgba(110, 128, 180, 0.5) 25%, rgba(110, 128, 180, 0.5) 50%,rgba(111, 154, 205, 0.5) 50%, rgba(111, 154, 205, 0.5) 75%,rgba(113, 179, 231, 0.5) 75%, rgba(113, 179, 231, 0.5) 100%),linear-gradient(135deg, rgb(7, 175, 249) 0%, rgb(7, 175, 249) 25%,rgb(11, 140, 230) 25%, rgb(11, 140, 230) 50%,rgb(16, 105, 211) 50%, rgb(16, 105, 211) 75%,rgb(20, 70, 192) 75%, rgb(20, 70, 192) 100%);
-    margin: 6px;
+@font-face {
+    font-family: Lato;
+    font-style: regular;
+    src: url("https://fonts.googleapis.com/css?family=Lato");
 }
 
-.label-style-optionlabel{
+
+.gradient-bg{
+    -fx-background-color:
+        linear-gradient(
+            to top left,
+            rgb(7, 175, 249) 0%,
+            rgb(7, 175, 249) 25%,
+            rgb(11, 140, 230) 25%,
+            rgb(11, 140, 230) 50%,
+            rgb(16, 105, 211) 50%,
+            rgb(16, 105, 211) 75%,
+            rgb(20, 70, 192) 75%,
+            rgb(20, 70, 192) 100%),
+        linear-gradient(
+            to top right,
+            rgba(108, 103, 154, 0.5) 0%,
+            rgba(108, 103, 154, 0.5) 25%,
+            rgba(110, 128, 180, 0.5) 25%,
+            rgba(110, 128, 180, 0.5) 50%,
+            rgba(111, 154, 205, 0.5) 50%,
+            rgba(111, 154, 205, 0.5) 75%,
+            rgba(113, 179, 231, 0.5) 75%,
+            rgba(113, 179, 231, 0.5) 100%)
+        ;
+
+
+}
+
+.label-style-title{
     -fx-font-weight: bold;
+    -fx-font-family: Lato;
     margin: 6px;
 }
