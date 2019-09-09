@@ -34,6 +34,8 @@ public class Main extends Application {
 	private FileChooser fileChooser;
 	private File file;
 	
+	private Graph graph;
+	
 	//Gui Menu titles
 	static final String MAIN_MENU_TITLE = "Graph Program", LOADER_TITLE = "Load a graph from a text file...";
 	
@@ -114,8 +116,7 @@ public class Main extends Application {
 		}
 		
 		if(file != null && file.exists()){
-		    loadGraph(filePathField.getText());
-			//Load Graph
+		    graph = loadGraph(filePathField.getText());
 			//Check that graph loaded
 			//Change main menu label accordingly
 		}
@@ -153,7 +154,7 @@ public class Main extends Application {
                     vector.addEdge(new ListVertex(Integer.parseInt(lineArr[j]), Integer.parseInt(lineArr[j])));
                 }
             }
-            graph.addVector(vector, vector);
+            graph.addVertex(vector, vector);
         }
         return graph;
     }

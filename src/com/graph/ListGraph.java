@@ -1,18 +1,25 @@
 package com.graph;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ListGraph<T, V> implements Graph<T,V> {
     
-    private ListVertex entryPoint;
+    
+    private ArrayList<ListVertex> vertices;
 
     public ListGraph(){
-        this.entryPoint = null;
+        this(5);
     }
 
-    public ListGraph(ListVertex entryPoint){
-       this.entryPoint = entryPoint;
+    public ListGraph(int vertices){
+       this.vertices = new ArrayList<>(vertices);
+    }
+    
+    public ListGraph(ListVertex ... vertices){
+        this.vertices = new ArrayList<>(vertices.length);
+        Collections.addAll(this.vertices, vertices);
     }
     
     @Override
@@ -34,10 +41,14 @@ public class ListGraph<T, V> implements Graph<T,V> {
         return null;
     }
     
-    /**@see com.graph.Graph#addVector**/
+    /**@see com.graph.Graph#addVertex **/
     @Override
-    public void addVector(T nodeID, V value) {
-    
+    public void addVertex(T vertexID, V value) {
+        ListVertex<T,V> vertex = new ListVertex<>(vertexID, value);
+        
+        if(!vertices.contains(vertex)){
+            vertices.add(vertex);
+        }
     }
     
     @Override
@@ -45,5 +56,9 @@ public class ListGraph<T, V> implements Graph<T,V> {
         return new ArrayList<>();
     }
     
-   
+    @Override
+    public String toString() {
+        return "A List Graph";
+    }
+    
 }

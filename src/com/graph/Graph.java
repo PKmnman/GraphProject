@@ -22,7 +22,7 @@ public interface Graph<T,V> {
 	 * @param nodeID a unique identifier for the node
 	 * @param value the node's stored value
 	 */
-	void addVector(T nodeID, V value);
+	void addVertex(T nodeID, V value);
 	
 	/**
 	 * Returns an array of all {@link GraphVertex} objects contained
@@ -85,6 +85,15 @@ public interface Graph<T,V> {
         public void setValue(V value) {
             this.value = value;
         }
-        
-    }
+		
+		@Override
+		public boolean equals(Object obj) {
+			if(this.getClass().isInstance(obj) && this.getVectorID().getClass().equals(((GraphVertex)obj).getVectorID())){
+				return this.getVectorID().equals(((GraphVertex) obj).getVectorID());
+			}
+        	
+        	return false;
+		}
+		
+	}
 }
