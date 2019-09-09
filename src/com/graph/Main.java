@@ -143,14 +143,14 @@ public class Main extends Application {
         ListGraph graph = new ListGraph();
 
         while (scan.hasNextLine()) {
-            ListVector vector = new ListVector();
+            ListVertex vector = new ListVertex();
             String line = scan.nextLine();
             String[] lineArr = line.split(" ");
             for (int j = 0; j < lineArr.length; j++) {
                 if (j == 0) {
-                    vector = new ListVector(Integer.parseInt(lineArr[0]), Integer.parseInt(lineArr[0]));
+                    vector = new ListVertex(Integer.parseInt(lineArr[0]), Integer.parseInt(lineArr[0]));
                 } else {
-                    vector.addEdge(new ListVector(Integer.parseInt(lineArr[j]), Integer.parseInt(lineArr[j])));
+                    vector.addEdge(new ListVertex(Integer.parseInt(lineArr[j]), Integer.parseInt(lineArr[j])));
                 }
             }
             graph.addVector(vector, vector);
