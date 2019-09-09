@@ -14,7 +14,10 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
+import java.util.Scanner;
 
 /*************************************************************************************
  *  Program:     Main.java
@@ -111,6 +114,7 @@ public class Main extends Application {
 		}
 		
 		if(file != null && file.exists()){
+		    loadGraph(filePathField.getText());
 			//Load Graph
 			//Check that graph loaded
 			//Change main menu label accordingly
@@ -126,5 +130,34 @@ public class Main extends Application {
 		s.setTitle(title);
 		s.show();
 	}
+
+	public static ListGraph loadGraph(String fileName) {
+        FileReader inFile = null;
+        try {
+            inFile = new FileReader(fileName);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        Scanner scan = new Scanner(inFile);
+
+        ListGraph graph = new ListGraph();
+
+        while (scan.hasNextLine()) {
+            ListVector vector = new ListVector();
+            String line = scan.nextLine();
+            String[] lineArr = line.split(" ");
+            for (int j = 0; j < lineArr.length; j++) {
+                if (j == 0) {
+                    vector = new ListVector(Integer.parseInt(lineArr[0]), Integer.parseInt(lineArr[0]));
+                } else {
+                    vector.addEdge(new ListVector(Integer.parseInt(lineArr[j]), Integer.parseInt(lineArr[j])));
+                }
+            }
+            graph.addVector(vector, vector);
+        }
+        return graph;
+    }
+
+
 	
 }
