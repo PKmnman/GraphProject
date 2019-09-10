@@ -46,6 +46,7 @@ public class Main {
 	
 	//Main Method
 	public static void main(String[] args) throws Exception {
+		//TODO: Finish UI
 		//Application.launch(Main.class);
 		
 		graph = loadGraph("C:\\Users\\ksrot\\Dropbox\\Java Programs\\Graph Project\\res\\sample_file.txt");
@@ -72,9 +73,11 @@ public class Main {
 		if(bfs == null){
 			System.out.println("Null list");
 		}else {
-			for (int i = 0; i < bfs.size(); i++) {
-				System.out.println(((ListVertex)bfs.get(i)).getVectorID());
+			System.out.print(((ListVertex)bfs.get(0)).getVectorID());
+			for (int i = 1; i < bfs.size(); i++) {
+				System.out.printf(" > %s",((ListVertex)bfs.get(i)).getVectorID());
 			}
+			System.out.println();
 		}
 		
 		System.exit(0);

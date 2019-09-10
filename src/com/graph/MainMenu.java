@@ -21,6 +21,8 @@ public class MainMenu {
 	@FXML
 	private TextField dFSTextField;
 	
+	//TODO: Add all main menu functions
+	
 	@FXML
 	private void onKeyReleased(KeyEvent e){
 		if(e.getCode() == KeyCode.ENTER){

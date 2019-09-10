@@ -78,34 +78,28 @@ public class ListGraph<V> implements Graph<Integer, V> {
         //Check if node even exist
         if (this.contains(nodeID)) {
             //This is the starting vertex
-            GraphVertex vertex = vertices.get(vertices.indexOf(new ListVertex<V>(nodeID, null)));
+            ListVertex vertex = vertices.get(vertices.indexOf(new ListVertex<V>(nodeID, null)));
             
             //The tracking array
-            boolean[] visitedVertices = new boolean[this.vertices.size()];
-            Arrays.fill(visitedVertices, false);
             LinkedList<ListVertex> result = new LinkedList<>();
-            
+            ArrayList<ListVertex> visited = new ArrayList<>(vertices.size());
             //The processing queue
-            Queue<GraphVertex> visited = new ArrayDeque<>();
+            Queue<ListVertex> queue = new ArrayDeque<>();
             
-            visited.add(vertex);
+            queue.add(vertex);
             
-            while (!visited.isEmpty()) {
+            while (!queue.isEmpty()) {
                 //Pop head of queue into v
-                ListVertex v = (ListVertex)visited.poll();
+                ListVertex v = queue.poll();
                 
                 //For each vertex w adjacent to v
-                for (int i = 0; i <vertex.getEdges().size(); i++) {
-                    //Init w to edge i
-                    ListVertex w = (ListVertex)vertex.getEdges().get(i);
-                    
+                for (ListVertex w : (List<ListVertex>)v.getEdges()) {
+                    result.add(w);
                     //Check if it has not been visited
-                    if(!visitedVertices[vertices.indexOf(w)]){
-                        //Visit
-                        visitedVertices[vertices.indexOf(w)] = true;
-                        result.add(w);
-                        //Queue
+                    if(!visited.contains(w)){
                         visited.add(w);
+                        //Queue
+                        queue.add(w);
                     }
                 }
             }
