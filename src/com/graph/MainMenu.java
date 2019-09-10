@@ -37,7 +37,7 @@ public class MainMenu {
 	
 	@FXML
 	private void onLoadGraphClicked(ActionEvent e){
-		Main.changeScene(e, Main.browseDialog, Main.LOADER_TITLE);
+		Main.loadFromFile.show();
 	}
 	
 }
