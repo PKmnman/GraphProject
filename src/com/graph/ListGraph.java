@@ -43,8 +43,15 @@ public class ListGraph<T, V> implements Graph<T, V> {
 
             while (visited.peek() != null) {
                 bfsList.add(visited.remove());
-                for (int i = 0; i <; i++) {
-
+                for (int i = 0; i <vertex.getEdges().size(); i++) {
+                    int[] neighbors = new int[vertex.getEdges().size()];
+                    neighbors[i]= vertex.getEdges().indexOf(i);
+                    for (int j = 0; j < bfsList.size(); j++) {
+                        if (neighbors[i] == bfsList.indexOf(j) ){
+                        }else{
+                            breadthSearch(neighbors[j]);
+                        }
+                    }
                 }
             }
             return null;
