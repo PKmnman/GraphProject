@@ -1,9 +1,8 @@
-package com.graph;
+package com.graph.ui;
 
-import com.graph.ui.FileDialogController;
-import com.graph.ui.ValueDialog;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.Property;
+import com.graph.ListGraph;
+import com.graph.ListVertex;
+import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,9 +10,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -51,36 +47,45 @@ public class MainMenu extends VBox {
 	}
 
 	public void initialize() {
+		//Init the "load file" dialog
 		fileDialogController = new FileDialogController();
 		fileDialogController.setMainMenu(this);
 
+		//Init the "input value" dialog
 		valueDialogController = new ValueDialog();
 		valueDialogController.setMainMenu(this);
 
-
+		//Init the "load file" dialog window
 		fileDialog = new Stage();
 		fileDialog.setScene(new Scene(fileDialogController));
-
 		fileDialog.initModality(Modality.APPLICATION_MODAL);
 		fileDialog.setResizable(false);
 		fileDialog.setTitle("Load Graph from file...");
 
+		//Init the "enter value" dialog window
 		valueDialog = new Stage();
 		valueDialog.setScene(new Scene(valueDialogController));
 		valueDialog.initModality(Modality.APPLICATION_MODAL);
 		valueDialog.setResizable(false);
 		valueDialog.setTitle("");
-
+		
+		//Add handler to reset error text on dialog open
 		valueDialog.setOnShown(l -> valueDialogController.reset());
 
+		//Bind the search mode prop to the dialog's title prop
 		valueDialogController.searchModeProperty().bind(valueDialog.titleProperty());
 	}
-
+	
+	/**
+	 * Loads the main application icon's from it's primary stage.
+	 * @param primaryStage the primary stage passed to {@link Application#start(Stage)}
+	 */
 	public void initIcon(Stage primaryStage){
 		valueDialog.getIcons().addAll(primaryStage.getIcons());
 		fileDialog.getIcons().addAll(primaryStage.getIcons());
 	}
-
+	
+	//This is the event handler for the "Load..." button
 	@FXML private void onLoadGraphClicked(ActionEvent e){
 		if(fileDialog.getOwner() == null){
 			fileDialog.initOwner(this.getScene().getWindow());
@@ -88,43 +93,59 @@ public class MainMenu extends VBox {
 		fileDialog.show();
 	}
 
+	//This is the event handler for the depth-first search button
 	@FXML private void onDFSClicked(ActionEvent e){
+		//Lazily init the owner of the dialog to this MainMenu
 		if(valueDialog.getOwner() == null){
 			valueDialog.initOwner(this.getScene().getWindow());
 		}
 
-		//Call searchDFS method
+		//Show the dialog as long as there is a graph to search
 		if(graph != null){
 			valueDialog.setTitle(DFS_LABEL);
 			valueDialog.show();
 		}
 
 	}
-
-	public void dfsGraph(int start){
+	
+	/**
+	 * Performs a depth-first search on the loaded graph at the
+	 * specified starting vertex.
+	 * @param start the starting vertex
+	 */
+	void dfsGraph(int start){
 		if(graph != null){
+			//Store result of DFS
 			List<ListVertex> dfs = (List<ListVertex>) graph.depthSearch(start);
+			//Format result
 			StringBuilder sb = new StringBuilder().append(dfs.get(0).getVectorID());
 			for (int i = 1; i < dfs.size(); i++) {
 				sb.append(" ,").append(dfs.get(i).getVectorID());
 			}
-
+			//Update result text
 			textDisplay.setText(sb.toString());
 		}
 	}
 
 	@FXML private void onBFSClicked(ActionEvent actionEvent) {
+		//Lazily init the dialog owner
 		if(valueDialog.getOwner() == null){
 			valueDialog.initOwner(this.getScene().getWindow());
 		}
 
+		//Show dialog if graph is loaded
 		if(graph != null){
 			valueDialog.setTitle(BFS_LABEL);
 			valueDialog.show();
 		}
 	}
-
-	public void bfsGraph(int start) {
+	
+	/**
+	 * Performs a breadth-first search on the loaded graph at the specified
+	 * starting vertex.
+	 * @param start
+	 */
+	void bfsGraph(int start) {
 		if(graph != null){
 			List<ListVertex> bfs = (List<ListVertex>) graph.breadthSearch(start);
 			StringBuilder sb = new StringBuilder().append(bfs.get(0).getVectorID());
@@ -136,6 +157,8 @@ public class MainMenu extends VBox {
 		}
 	}
 
+	//Getters and setters for the graph
+	
 	public ListGraph<Integer> getGraph(){
 		return this.graph;
 	}
@@ -143,10 +166,5 @@ public class MainMenu extends VBox {
 	public void setGraph(ListGraph<Integer> graph){
 		this.graph = graph;
 	}
-
-	public FileDialogController getFileDialogController() {
-		return fileDialogController;
-	}
-
-
+	
 }

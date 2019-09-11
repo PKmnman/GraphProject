@@ -1,7 +1,7 @@
 package com.graph.ui;
 
-import com.graph.MainMenu;
-import javafx.beans.property.*;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,7 +12,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 
 import java.io.IOException;
-import java.util.OptionalInt;
 
 public class ValueDialog extends BorderPane {
 
@@ -27,7 +26,7 @@ public class ValueDialog extends BorderPane {
 	private static final String LABEL_ERROR = "Please enter an integer";
 
 	public ValueDialog() {
-
+		//Load scene
 		FXMLLoader loader = new FXMLLoader(MainMenu.class.getResource("/ValueDialog.fxml"));
 		loader.setRoot(this);
 		loader.setController(this);
@@ -41,36 +40,50 @@ public class ValueDialog extends BorderPane {
 	}
 
 	public void initialize(){
-		label.setTextFill(Color.WHITE);
+		//Set confirm action
+		valueField.setOnAction(this::onConfirm);
 	}
-
-	public void reset(){
+	
+	/**
+	 * Set the prompt label to it's default valuew
+	 */
+	void reset(){
 		label.setTextFill(Color.WHITE);
 		label.setText(LABEL_DEFAULT);
-
 	}
 
-	public void onConfirm(ActionEvent e){
+	@FXML
+	private void onConfirm(ActionEvent e){
+		//Store input
 		String input = valueField.getText();
 		try {
+			//Parse input
 			int i = Integer.parseInt(input);
+			//Close window
 			this.getScene().getWindow().hide();
+			
+			//Check the search mode and select perform search
 			if(mode.get().equals(MainMenu.DFS_LABEL)){
 				mainMenu.dfsGraph(i);
 			}else if(mode.get().equals(MainMenu.BFS_LABEL)){
 				mainMenu.bfsGraph(i);
 			}
 		} catch (NumberFormatException | NullPointerException e1) {
+			//Update label with error label
 			label.setText(LABEL_ERROR);
 			label.setTextFill(Color.CRIMSON);
 		}
 	}
-
-	public StringProperty searchModeProperty(){
+	
+	/**
+	 * Retrieves this {@link ValueDialog}'s search mode property.
+	 * @return the search mode property of this controller
+	 */
+	StringProperty searchModeProperty(){
 		return mode;
 	}
 
-	public void setMainMenu(MainMenu mainMenu) {
+	void setMainMenu(MainMenu mainMenu) {
 		this.mainMenu = mainMenu;
 	}
 }
