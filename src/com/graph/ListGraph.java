@@ -88,6 +88,7 @@ public class ListGraph<V> implements Graph<Integer, V> {
             
             queue.add(vertex);
             result.add(vertex);
+            visited.add(vertex);
             
             while (!queue.isEmpty()) {
                 //Pop head of queue into v
