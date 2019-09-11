@@ -1,6 +1,7 @@
 package com.graph.ui;
 
 import com.graph.Main;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -41,6 +42,8 @@ public class FileDialogController extends BorderPane {
 		FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("Text Files", "*.txt");
 		fileChooser.getExtensionFilters().add(filter);
 		fileChooser.setInitialDirectory(new File("./"));
+		
+		filePathField.setOnAction(this::OnConfirm);
 	}
 
 	@FXML
@@ -53,7 +56,7 @@ public class FileDialogController extends BorderPane {
 	}
 
 	@FXML
-	private void OnConfirm() {
+	private void OnConfirm(ActionEvent event) {
 		if(file != null && file.canRead()){
 			mainMenu.setGraph(Main.loadGraph(file.getPath()));
 			if(mainMenu.getGraph() != null){
