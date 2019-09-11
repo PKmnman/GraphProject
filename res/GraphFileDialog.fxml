@@ -1,44 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.effect.*?>
 <?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.graph.Main">
-   <children>
-      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="640.0" VBox.vgrow="NEVER">
-         <center>
-            <TextField fx:id="filePathField" editable="false" BorderPane.alignment="CENTER">
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-               <BorderPane.margin>
-                  <Insets bottom="6.0" left="6.0" right="6.0" />
-               </BorderPane.margin>
-            </TextField>
-         </center>
-         <right>
-            <Button id="browseBttn" fx:id="BrowseBttn" mnemonicParsing="false" onMouseClicked="#onClickBrowse" prefHeight="25.0" prefWidth="75.0" text="Browse..." BorderPane.alignment="CENTER">
-               <BorderPane.margin>
-                  <Insets bottom="6.0" left="6.0" right="6.0" />
-               </BorderPane.margin>
-               <padding>
-                  <Insets left="6.0" right="6.0" />
-               </padding>
-            </Button>
-         </right>
-         <top>
-            <Label styleClass="label-style-title" stylesheets="@GraphProgram.css" text="Generate Graph From File:" BorderPane.alignment="CENTER_LEFT">
-               <BorderPane.margin>
-                  <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
-               </BorderPane.margin>
-            </Label>
-         </top>
+<fx:root type="BorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" scaleShape="false" styleClass="gradient-bg" stylesheets="@GraphProgram.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <TextField fx:id="filePathField" editable="false" minWidth="320.0" stylesheets="@GraphProgram.css" BorderPane.alignment="CENTER">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <BorderPane.margin>
+            <Insets bottom="6.0" left="6.0" right="6.0" />
+         </BorderPane.margin>
+      </TextField>
+   </center>
+   <right>
+      <Button id="browseBttn" fx:id="BrowseBttn" mnemonicParsing="false" onMouseClicked="#onClickBrowse" prefHeight="25.0" prefWidth="75.0" text="Browse..." BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="6.0" left="6.0" right="6.0" />
+         </BorderPane.margin>
          <padding>
             <Insets left="6.0" right="6.0" />
          </padding>
-      </BorderPane>
-   </children>
-</VBox>
+      </Button>
+   </right>
+   <top>
+      <Label stylesheets="@GraphProgram.css" text="Generate Graph From File:" textFill="WHITE" BorderPane.alignment="CENTER_LEFT">
+         <BorderPane.margin>
+            <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
+         </BorderPane.margin>
+      </Label>
+   </top>
+   <padding>
+      <Insets left="6.0" right="6.0" />
+   </padding>
+   <bottom>
+      <Button mnemonicParsing="false" onAction="#OnConfirm" prefWidth="104.0" text="OK" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
+         </BorderPane.margin>
+      </Button>
+   </bottom>
+</fx:root>

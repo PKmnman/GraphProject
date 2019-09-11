@@ -94,10 +94,10 @@ public class ListGraph<V> implements Graph<Integer, V> {
                 
                 //For each vertex w adjacent to v
                 for (ListVertex w : (List<ListVertex>)v.getEdges()) {
-                    result.add(w);
                     //Check if it has not been visited
                     if(!visited.contains(w)){
                         visited.add(w);
+                        result.add(w);
                         //Queue
                         queue.add(w);
                     }

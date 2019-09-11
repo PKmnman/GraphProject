@@ -1,5 +1,7 @@
 package com.graph;
 
+import com.sun.javafx.tk.Toolkit;
+import javafx.application.Application;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,8 +10,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Control;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -26,92 +30,32 @@ import java.util.Scanner;
  *  Author: 	 Gary Reeves
  *  Assignment:  Graph Project
  *************************************************************************************/
-public class Main {
-	
-	public Button BrowseBttn, ConfirmBttn, CancelBttn;
-	@FXML
-	private TextField filePathField;
-	
-	private FileChooser fileChooser;
-	private File file;
-	
+public class Main extends Application {
+
+	private MainMenu mainMenu;
+
 	private static Graph graph;
 	
 	//Gui Menu titles
-	static final String MAIN_MENU_TITLE = "Graph Program", LOADER_TITLE = "Load a graph from a text file...";
-	
-	static Scene browseDialog, menu;
-	
-	static Stage loadFromFile;
+	static final String MAIN_MENU_TITLE = "Graph Program";
 	
 	//Main Method
 	public static void main(String[] args) throws Exception {
 		//TODO: Finish UI
-		//Application.launch(Main.class);
-		
-		graph = loadGraph("C:\\Users\\ksrot\\Dropbox\\Java Programs\\Graph Project\\res\\sample_file.txt");
-		
-		if(graph != null){
-			System.out.println(graph);
-			System.out.println();
-		}
-		
-		List dfs = graph.depthSearch(1);
-		System.out.println("Depth-First Search");
-		if(dfs == null){
-			System.out.println("Null list");
-		}else {
-			
-			for (int i = 0; i < dfs.size(); i++) {
-				System.out.println(((ListVertex)dfs.get(i)).getVectorID());
-			}
-			System.out.println();
-		}
-		
-		List bfs = graph.breadthSearch(1);
-		System.out.println("Breadth-First Search");
-		if(bfs == null){
-			System.out.println("Null list");
-		}else {
-			System.out.print(((ListVertex)bfs.get(0)).getVectorID());
-			for (int i = 1; i < bfs.size(); i++) {
-				System.out.printf(" > %s",((ListVertex)bfs.get(i)).getVectorID());
-			}
-			System.out.println();
-		}
-		
-		System.exit(0);
+		Application.launch(Main.class);
+
 	}
 	
 	//Where the GUI code gets executed
 	
 	public void start(Stage primaryStage) throws Exception {
-		
-		Parent p;
-		
-		loadFromFile = new Stage(StageStyle.DECORATED);
-		
-		try {
-			//Load all of the GUI's
-			p = FXMLLoader.load(Main.class.getResource("/GraphFileDialog.fxml"));
-			browseDialog = new Scene(p);
-			
-			loadFromFile.setScene(browseDialog);
-			loadFromFile.sizeToScene();
-			loadFromFile.resizableProperty().set(false);
-			loadFromFile.initOwner(primaryStage);
-			
-			
-			p = FXMLLoader.load(MainMenu.class.getResource("/MainMenu.fxml"));
-			menu = new Scene(p);
-			
-		} catch (IOException e){
-			System.err.println("There was a problem loading the FXML scene data");
-			System.err.println(e.getMessage());
-		}
-		
-		
-		
+
+		mainMenu = new MainMenu();
+		Scene menu = new Scene(mainMenu);
+
+		primaryStage.getIcons().add(new Image(Main.class.getResourceAsStream("/icon.png")));
+		mainMenu.initIcon(primaryStage);
+
 		//Set the scene to the main menu
 		primaryStage.setScene(menu);
 		primaryStage.setResizable(false);
@@ -120,62 +64,6 @@ public class Main {
 		//Display
 		primaryStage.show();
 		
-	}
-	
-	//Graph Loading Event Handler Methods
-	
-	@FXML
-	private void OnCancel(MouseEvent event) {
-		changeScene(event, menu, MAIN_MENU_TITLE);
-	}
-	
-	@FXML
-	private void onClickBrowse(MouseEvent event){
-		fileChooser = new FileChooser();
-		FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("Text Files", "*.txt");
-		fileChooser.getExtensionFilters().add(filter);
-		
-		file = fileChooser.showOpenDialog(BrowseBttn.getScene().getWindow());
-		
-		if(file != null){
-			filePathField.setText(file.getAbsolutePath());
-		}else{
-			filePathField.clear();
-		}
-	}
-	
-	@FXML
-	private void OnConfirm(MouseEvent event) {
-		if(file == null && !filePathField.getText().equals("")){
-			file = new File(filePathField.getText());
-			if(!file.toPath().endsWith(".txt")){
-				//Should probs display error message here
-				System.err.println("Text file not selected");
-				//Switch back to the main menu
-				Main.changeScene(event, menu, MAIN_MENU_TITLE);
-				filePathField.clear();
-				//Skip further execution
-				return;
-			}
-			
-			
-		}
-		
-		if(file != null && file.exists()){
-		    graph = loadGraph(filePathField.getText());
-			//Check that graph loaded
-			//Change main menu label accordingly
-		}
-	}
-	
-	public static void changeScene(Event e, Scene scene, String title){
-		Stage s = (Stage)((Control)e.getSource()).getScene().getWindow();
-		
-		s.hide();
-		s.setScene(scene);
-		s.sizeToScene();
-		s.setTitle(title);
-		s.show();
 	}
 
 	public static ListGraph loadGraph(String fileName) {
