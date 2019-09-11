@@ -1,6 +1,5 @@
 package com.graph;
 
-import javafx.application.Application;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,6 +17,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.List;
 import java.util.Scanner;
 
 /*************************************************************************************
@@ -26,7 +26,7 @@ import java.util.Scanner;
  *  Author: 	 Gary Reeves
  *  Assignment:  Graph Project
  *************************************************************************************/
-public class Main extends Application {
+public class Main {
 	
 	public Button BrowseBttn, ConfirmBttn, CancelBttn;
 	@FXML
@@ -35,7 +35,7 @@ public class Main extends Application {
 	private FileChooser fileChooser;
 	private File file;
 	
-	private Graph graph;
+	private static Graph graph;
 	
 	//Gui Menu titles
 	static final String MAIN_MENU_TITLE = "Graph Program", LOADER_TITLE = "Load a graph from a text file...";
@@ -46,12 +46,45 @@ public class Main extends Application {
 	
 	//Main Method
 	public static void main(String[] args) throws Exception {
-		Application.launch(Main.class);
+		//TODO: Finish UI
+		//Application.launch(Main.class);
 		
+		graph = loadGraph("C:\\Users\\ksrot\\Dropbox\\Java Programs\\Graph Project\\res\\sample_file.txt");
+		
+		if(graph != null){
+			System.out.println(graph);
+			System.out.println();
+		}
+		
+		List dfs = graph.depthSearch(1);
+		System.out.println("Depth-First Search");
+		if(dfs == null){
+			System.out.println("Null list");
+		}else {
+			
+			for (int i = 0; i < dfs.size(); i++) {
+				System.out.println(((ListVertex)dfs.get(i)).getVectorID());
+			}
+			System.out.println();
+		}
+		
+		List bfs = graph.breadthSearch(1);
+		System.out.println("Breadth-First Search");
+		if(bfs == null){
+			System.out.println("Null list");
+		}else {
+			System.out.print(((ListVertex)bfs.get(0)).getVectorID());
+			for (int i = 1; i < bfs.size(); i++) {
+				System.out.printf(" > %s",((ListVertex)bfs.get(i)).getVectorID());
+			}
+			System.out.println();
+		}
+		
+		System.exit(0);
 	}
 	
 	//Where the GUI code gets executed
-	@Override
+	
 	public void start(Stage primaryStage) throws Exception {
 		
 		Parent p;
@@ -146,31 +179,65 @@ public class Main extends Application {
 	}
 
 	public static ListGraph loadGraph(String fileName) {
-        FileReader inFile = null;
+        
         try {
-            inFile = new FileReader(fileName);
+			FileReader inFile = new FileReader(fileName);
+	
+			Scanner fileScanner = new Scanner(inFile);
+			
+			//Read first line for graph size
+			String initLine = fileScanner.nextLine();
+			String[] initValues = initLine.split(" ");
+			
+			//Check that the size line has a value
+			if(initValues.length <= 1){
+				Scanner stringScanner = new Scanner(initValues[0]);
+				//Init Graph
+				graph = new ListGraph<Integer>(stringScanner.nextInt());
+			}else{
+				//There's a problem with the format of the file if this statement was reached
+				return null;
+			}
+			
+			//Loop through file
+			int id = 1;
+			while (fileScanner.hasNextLine()) {
+				//Read and split each line
+				String line = fileScanner.nextLine();
+				String[] lineArr = line.split(" ");
+				//Load each vertex definition
+				loadVertex(id,lineArr);
+				//Advance to the next line
+				id++;
+			}
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        Scanner scan = new Scanner(inFile);
-
-        ListGraph graph = new ListGraph();
-
-        while (scan.hasNextLine()) {
-            ListVertex vector = new ListVertex();
-            String line = scan.nextLine();
-            String[] lineArr = line.split(" ");
-            for (int j = 0; j < lineArr.length; j++) {
-                if (j == 0) {
-                    vector = new ListVertex(Integer.parseInt(lineArr[0]), Integer.parseInt(lineArr[0]));
-                } else {
-                    vector.addEdge(new ListVertex(Integer.parseInt(lineArr[j]), Integer.parseInt(lineArr[j])));
-                }
-            }
-            graph.addVertex(vector, vector);
-        }
-        return graph;
+        
+        //Return the fully loaded graph
+        return (ListGraph)graph;
+        
     }
+    
+    private static void loadVertex(int lineNum, String[] line){
+		//Get the default vertex from the adjacency list
+		ListVertex<Integer> vertex = (ListVertex<Integer>)graph.getVertices().get(lineNum - 1);
+		
+		//For each edge specified in the file
+		for (int i = 0; i < line.length; i++) {
+			try{
+				//Get edge index/ID
+				int w = Integer.parseInt(line[i]);
+				
+				//Add the edge to the vertex
+				vertex.addEdge((ListVertex)graph.getVertices().get(w - 1));
+				
+			}catch (NumberFormatException e){
+				System.err.println("Error parsing Graph file: NumberFormatException");
+				return;
+			}
+		}
+	}
 
 
 	

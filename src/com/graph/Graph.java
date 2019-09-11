@@ -7,12 +7,11 @@ public interface Graph<T,V> {
 	/**
 	 * Performs a Depth-First search of this graph for the specified
 	 * vector and returns it's value.
-	 * @param vector the current vector to visit
-	 * @param targetVectorID the vector to search for
+	 * @param vectorID the vector to search for
 	 * @return the {@link GraphVertex} being searched for, null if it is not found
 	 */
-    GraphVertex<T,V> depthSearch(GraphVertex vector, T targetVectorID);
-    GraphVertex<T,V> breadthSearch(T nodeID);
+    List<? extends GraphVertex> depthSearch(T vectorID);
+    List<? extends GraphVertex> breadthSearch(T nodeID);
     
     //By adding this, we're saying the implementing class MUST override toString()
     String toString();
@@ -24,13 +23,17 @@ public interface Graph<T,V> {
 	 */
 	void addVertex(T nodeID, V value);
 	
+	void addVertex(GraphVertex v);
+	
 	/**
 	 * Returns an array of all {@link GraphVertex} objects contained
 	 * in this {@link Graph}
 	 * @return an array of this graph's vectors
 	 */
-	List<? extends GraphVertex<T, V>> getVectors();
-	
+	List<? extends GraphVertex<T, V>> getVertices();
+
+	boolean contains(T nodeID);
+
 	/**
 	 * This abstract class represents key-value pair within a {@link Graph}
 	 * @param <T> the type of the vector identifier
@@ -38,8 +41,8 @@ public interface Graph<T,V> {
 	 */
     abstract class GraphVertex<T, V>{
     
-		private T vectorID;
-        private V value;
+		protected T vectorID;
+        protected V value;
         
         GraphVertex(T vectorID, V value){
             this.vectorID = vectorID;
@@ -85,15 +88,6 @@ public interface Graph<T,V> {
         public void setValue(V value) {
             this.value = value;
         }
-		
-		@Override
-		public boolean equals(Object obj) {
-			if(this.getClass().isInstance(obj) && this.getVectorID().getClass().equals(((GraphVertex)obj).getVectorID())){
-				return this.getVectorID().equals(((GraphVertex) obj).getVectorID());
-			}
-        	
-        	return false;
-		}
 		
 	}
 }
