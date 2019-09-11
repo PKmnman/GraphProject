@@ -25,7 +25,7 @@ public class MainMenu extends VBox {
 
 	@FXML public Button bFSButton, loadGraphButton, dFSButton;
 	@FXML public TextArea textDisplay;
-	@FXML public Label notifLabel;
+	@FXML public Label currentGraphLabel;
 
 	public static final String BFS_LABEL = "Breadth-First Search";
 	public static final String DFS_LABEL = "Depth-First Search";

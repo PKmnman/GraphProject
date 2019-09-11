@@ -1,0 +1,21 @@
+<component name="ArtifactManager">
+  <artifact type="javafx" build-on-make="true" name="Graph Project">
+    <output-path>$PROJECT_DIR$/out/artifacts/Graph_Project</output-path>
+    <properties id="javafx-properties">
+      <options>
+        <option name="appClass" value="com.graph.Main" />
+        <option name="description" value="" />
+        <option name="htmlPlaceholderId" value="" />
+        <option name="nativeBundle" value="exe" />
+        <option name="title" value="Graph Program" />
+        <option name="vendor" value="" />
+        <option name="version" value="1.0" />
+      </options>
+    </properties>
+    <root id="root">
+      <element id="archive" name="Graph_Project.jar">
+        <element id="module-output" name="Graph Project" />
+      </element>
+    </root>
+  </artifact>
+</component>

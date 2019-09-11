@@ -31,7 +31,7 @@
                         <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
                      </GridPane.margin>
                   </Label>
-                  <Label fx:id="notifLabel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="238.0" text="No graph currently loaded..." textOverrun="WORD_ELLIPSIS" GridPane.columnIndex="1">
+                  <Label fx:id="currentGraphLabel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="238.0" text="No graph currently loaded..." textOverrun="WORD_ELLIPSIS" GridPane.columnIndex="1">
                      <GridPane.margin>
                         <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
                      </GridPane.margin>

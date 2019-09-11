@@ -16,15 +16,12 @@ import java.io.IOException;
 
 public class FileDialogController extends BorderPane {
 
-	public Button BrowseBttn, ConfirmBttn;
-	@FXML
-	private TextField filePathField;
-	@FXML
+	@FXML private Button BrowseBttn, ConfirmBttn;
+	@FXML private TextField filePathField;
+
 	private MainMenu mainMenu;
 	private FileChooser fileChooser;
 	private File file;
-
-	private Stage dialog;
 
 	public FileDialogController(){
 		FXMLLoader loader = new FXMLLoader(MainMenu.class.getResource("/GraphFileDialog.fxml"));
@@ -38,6 +35,9 @@ public class FileDialogController extends BorderPane {
 		}
 	}
 
+	/**
+	 * Initializes the controller after the root scene has been loaded
+	 */
 	public void initialize(){
 		fileChooser = new FileChooser();
 		FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("Text Files", "*.txt");
@@ -59,10 +59,10 @@ public class FileDialogController extends BorderPane {
 		if(file != null && file.canRead()){
 			mainMenu.setGraph(Main.loadGraph(file.getPath()));
 			if(mainMenu.getGraph() != null){
-				mainMenu.notifLabel.setText(file.getName());
+				//Change currentgraphlabel to file name
+				mainMenu.currentGraphLabel.setText(file.getName());
 				this.getScene().getWindow().hide();
 			}
-			//Change main menu label accordingly
 		}
 	}
 
